@@ -51,6 +51,46 @@ app.post("/add", (req, res) => {
   res.send(obj1);
 });
 
+app.post("/sub", (req, res) => {
+  const obj1 = {
+    status: "",
+    message: "",
+    difference: 0
+  };
+  if (
+    typeof req.body.num1 === "string" ||
+    req.body.num1 instanceof String ||
+    typeof req.body.num2 === "string" ||
+    req.body.num2 instanceof String
+  ) {
+    obj1.status = "error";
+    obj1.message = "Invalid data types";
+  } else {
+    const num1 = Number(req.body.num1);
+    const num2 = Number(req.body.num2);
+
+    if (isNaN(num1) || isNaN(num2)) {
+      obj1.status = "error";
+      obj1.message = "Invalid data type";
+    } else {
+      const result = num1 - num2;
+      if (num1 < -1000000 || num2 < -1000000 || result < -1000000) {
+        obj1.status = "error";
+        obj1.message = "Underflow";
+      } else if (num1 > 1000000 || num2 > 1000000 || result > 1000000) {
+        obj1.status = "error";
+        obj1.message = "Overflow";
+      } else {
+        obj1.status = "success";
+        obj1.message = "the sum of given two numbers";
+        obj1.difference = result;
+      }
+    }
+  }
+
+  res.send(obj);
+});
+
 app.listen(port, () => console.log(`App listening on port ${port}!`));
 
 module.exports = app;
