@@ -82,13 +82,13 @@ app.post("/sub", (req, res) => {
         obj1.message = "Overflow";
       } else {
         obj1.status = "success";
-        obj1.message = "the sum of given two numbers";
+        obj1.message = "the difference of given two numbers";
         obj1.difference = result;
       }
     }
   }
 
-  res.send(obj);
+  res.send(obj1);
 });
 
 app.listen(port, () => console.log(`App listening on port ${port}!`));
