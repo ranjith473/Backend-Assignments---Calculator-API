@@ -11,6 +11,10 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use(bodyParser.json());
 // your code goes here
+app.get("", (req, res) => {
+  res.send("Hello World!");
+});
+
 app.post("/add", (req, res) => {
   const obj1 = {
     status: "",
